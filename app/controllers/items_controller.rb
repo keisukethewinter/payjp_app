@@ -7,6 +7,14 @@ class ItemsController < ApplicationController
 
   def order　# 購入のためのアクション
     redirect_to new_card_path and return unless current_user.card.present?
+
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    customer_token = current_user.card.customer_token # ログイン中のユーザーの顧客トークンを定義
+    Payjp::Charge.create(
+      amount: @item.price,
+      customer: customer_token, # 上で定義した顧客トークン
+      currency: 'jpy'
+    )
   end
 
   private
