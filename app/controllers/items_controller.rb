@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   end
 
   def order　# 購入のためのアクション
+    redirect_to new_card_path and return unless current_user.card.present?
   end
 
   private
@@ -13,5 +14,5 @@ class ItemsController < ApplicationController
   def find_item
     @item = Item.find(params[:id]) # 購入する商品の特定
   end
-  
+
 end
