@@ -17,6 +17,8 @@ class ItemsController < ApplicationController
     )
 
     ItemOrder.create(item_id: params[:id]) # params(商品id)を"item_id"として保存
+
+    redirect_to root_path
   end
 
   private
