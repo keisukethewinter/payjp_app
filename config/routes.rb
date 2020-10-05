@@ -4,5 +4,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :update]
   resources :cards, only: [:new, :create]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :items, only: :order do
+    post 'order', on: :member
+  end
+
 end
