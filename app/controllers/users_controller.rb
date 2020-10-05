@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   def show
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    card = Card.find_by(user_id: current_user.id) # ユーザーidを元にカード情報を取得
+
+    customer = Payjp::Customer.retrieve(card.customer_token) #上で取得したカード情報(変数"card")を元に顧客情報を取得
+    @card = customer.cards.first
   end
 
   def update
@@ -15,5 +20,5 @@ class UsersController < ApplicationController
   def user_params
     patams.require(:user).permit(:name, :email)
   end
-  
+
 end
