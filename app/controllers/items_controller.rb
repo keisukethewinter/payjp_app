@@ -15,6 +15,8 @@ class ItemsController < ApplicationController
       customer: customer_token, # 上で定義した顧客トークン
       currency: 'jpy'
     )
+
+    ItemOrder.create(item_id: params[:id]) # params(商品id)を"item_id"として保存
   end
 
   private
