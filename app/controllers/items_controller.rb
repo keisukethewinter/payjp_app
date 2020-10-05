@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  def order　# 購入のためのアクション
+  def order # 購入のためのアクション
     redirect_to new_card_path and return unless current_user.card.present?
 
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
